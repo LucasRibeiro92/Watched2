@@ -10,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MovieViewModel {
-    val omdbClient = OmdbClient.create()
+    private val omdbClient = OmdbClient.create()
     private val TAG = "CHECK_RESPONSE"
 
 
