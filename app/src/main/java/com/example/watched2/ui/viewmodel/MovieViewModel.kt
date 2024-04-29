@@ -5,11 +5,12 @@ import android.util.Log
 import com.example.watched2.data.remote.omdb.MovieSearchResponse
 import com.example.watched2.data.remote.omdb.OmdbClient
 import com.example.watched2.data.remote.omdb.OmdbClient.Companion.API_KEY
+import com.example.watched2.data.repository.MovieRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MovieViewModel {
+class MovieViewModel(private val movieRepository: MovieRepository) {
 
     private val omdbClient = OmdbClient.create()
     private val TAG = "CHECK_RESPONSE"
@@ -37,10 +38,11 @@ class MovieViewModel {
             })
     }
     */
-     */
     fun fetchMovieBySearch(title: Editable) {
         movieRepository.fetchMovieBySearch(OmdbClient.API_KEY, title, object : Callback<MovieSearchResponse> {
-            override fun onResponse(call: Call<MovieSearchResponse>, response: Response<MovieSearchResponse>) {
+            override fun onResponse(
+                call: Call<MovieSearchResponse>,
+                response: Response<MovieSearchResponse>) {
                 if (response.isSuccessful) {
                     val movieResponse = response.body()
                     movieResponse?.let {
@@ -48,7 +50,6 @@ class MovieViewModel {
                     }
                 }
             }
-
             override fun onFailure(call: Call<MovieSearchResponse>, t: Throwable) {
                 Log.d(TAG, "${t.message}")
             }
