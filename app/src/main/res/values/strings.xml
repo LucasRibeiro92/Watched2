@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Watched 2</string>
+    <string name="movietitle">movieTitle</string>
+    <string name="conteudo">conteudo</string>
 </resources>

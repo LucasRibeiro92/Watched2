@@ -22,4 +22,12 @@
         android:text="Search"
         tools:ignore="HardcodedText" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movieRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="ifContentScrolls"
+        android:padding="16dp"
+        android:layout_below="@+id/movieSearchButton"/>
+
 </RelativeLayout>
