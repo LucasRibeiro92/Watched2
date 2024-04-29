@@ -10,10 +10,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MovieViewModel {
+
     private val omdbClient = OmdbClient.create()
     private val TAG = "CHECK_RESPONSE"
 
-
+    /*
     fun fetchMovieBySearch(title: Editable) {
         omdbClient.getMovie(apiKey = API_KEY, title)
             .enqueue(object : Callback<MovieSearchResponse> {
@@ -34,5 +35,23 @@ class MovieViewModel {
                     Log.d(TAG, "${p1.message}")
                 }
             })
+    }
+    */
+     */
+    fun fetchMovieBySearch(title: Editable) {
+        movieRepository.fetchMovieBySearch(OmdbClient.API_KEY, title, object : Callback<MovieSearchResponse> {
+            override fun onResponse(call: Call<MovieSearchResponse>, response: Response<MovieSearchResponse>) {
+                if (response.isSuccessful) {
+                    val movieResponse = response.body()
+                    movieResponse?.let {
+                        Log.d(TAG, "${response.body()}")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MovieSearchResponse>, t: Throwable) {
+                Log.d(TAG, "${t.message}")
+            }
+        })
     }
 }
