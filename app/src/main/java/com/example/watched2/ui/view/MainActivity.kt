@@ -1,14 +1,11 @@
-package com.example.watched2.ui.view
-
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.watched2.R
+import com.example.watched2.data.repository.MovieRepository
 import com.example.watched2.databinding.ActivityMainBinding
 import com.example.watched2.ui.viewmodel.MovieViewModel
+import com.example.watched2.data.repository.contract.MovieResositoryContract
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,7 +20,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setupBindigs()
-        movieViewModel = MovieViewModel()
+
+        // Inicialize o MovieViewModel com uma instância de MovieRepository
+        val movieRepository: MovieResositoryContract = MovieRepository()
+        movieViewModel = MovieViewModel(movieRepository)
+
         listenSearchButton()
     }
 
@@ -34,8 +35,9 @@ class MainActivity : AppCompatActivity() {
         movieSearchEditText = binding.movieSearchEditText
         movieSearchButton = binding.movieSearchButton
     }
+
     private fun listenSearchButton() {
-        movieSearchButton.setOnClickListener{
+        movieSearchButton.setOnClickListener {
             val textToSearch = movieSearchEditText.text
             movieViewModel.fetchMovieBySearch(textToSearch)
         }

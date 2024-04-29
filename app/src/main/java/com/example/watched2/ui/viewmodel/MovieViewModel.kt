@@ -4,13 +4,12 @@ import android.text.Editable
 import android.util.Log
 import com.example.watched2.data.remote.omdb.MovieSearchResponse
 import com.example.watched2.data.remote.omdb.OmdbClient
-import com.example.watched2.data.remote.omdb.OmdbClient.Companion.API_KEY
-import com.example.watched2.data.repository.MovieRepository
+import com.example.watched2.data.repository.contract.MovieResositoryContract
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MovieViewModel(private val movieRepository: MovieRepository) {
+class MovieViewModel(private val movieRepository: MovieResositoryContract) {
 
     private val omdbClient = OmdbClient.create()
     private val TAG = "CHECK_RESPONSE"
